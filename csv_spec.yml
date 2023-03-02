@@ -1,0 +1,11 @@
+columns:
+  - name: ClaimTypeID
+    type: integer
+  - name: ClaimTypeCD
+    type: string
+    requirements:
+      - not_null
+  - name: ClaimTypeDesc
+    type: string
+  - name: RequiredColumn
+    type: integer
