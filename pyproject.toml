@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "streamlit_poc"
+version = "0.1.0"
+description = ""
+authors = ["Danny Beachnau <danny.beachnau@allcloud.io>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+streamlit = "^1.14.0"
+snowflake-connector-python = {extras = ["pandas"], version = "^2.8.0"}
+pydantic = "^1.10.2"
+PyYAML = "^6.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
