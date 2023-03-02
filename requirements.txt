@@ -5,5 +5,5 @@ streamlit-ace
 altair
 pydantic
 typing
-yaml
+pyyaml
 pathlib
