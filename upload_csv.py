@@ -9,7 +9,7 @@ import yaml
 from pathlib import Path
 import streamlit_authenticator as stauth
 
-with open('./login_config.yaml') as file:
+with open('./login_config.yml') as file:
     config = yaml.load(file, Loader=SafeLoader)
     
 authenticator = Authenticate(
