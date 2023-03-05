@@ -7,3 +7,4 @@ pydantic
 typing
 pyyaml
 pathlib
+streamlit-authenticator
