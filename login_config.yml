@@ -1,0 +1,10 @@
+credentials:
+  usernames:
+    jsmith:
+      email: kyle.keough@allcloud.io
+      name: Kyle Keough
+      password: '$2b$12$c/XqxtX6ZfeCPK0MFw7nWeg8XZ/kWUqmbsfTE/dB79zQ1ZbLhYtSO'
+cookie:
+  expiry_days: 30
+  key: 'password-rand-string-key'
+  name: random_cookie_name
