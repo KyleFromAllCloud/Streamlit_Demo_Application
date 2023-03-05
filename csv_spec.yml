@@ -1,5 +1,5 @@
 columns:
-  - name: BU	
+  - name: BU
     type: string
     requirements:
       - not_null
