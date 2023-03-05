@@ -47,4 +47,3 @@ columns:
     type: string
     requirements:
       - not_null
-
