@@ -9,6 +9,7 @@ import yaml
 from yaml import SafeLoader
 from pathlib import Path
 import streamlit_authenticator as stauth
+from snowflake.connector.pandas_tools import write_pandas
 
 with open('./login_config.yml') as file:
     config = yaml.load(file, Loader=SafeLoader)
@@ -100,6 +101,7 @@ if st.session_state["authentication_status"]:
         if 'RequiredColumn' not in uploaded_cols:
             st.write("Failed - Missing column 'RequiredColumn'")
         else:
+            success, nchunks, nrows, _ = write_pandas(conn, df, 'stauth_demo')
             st.write("Loaded!")
 
 elif st.session_state["authentication_status"] is False:
