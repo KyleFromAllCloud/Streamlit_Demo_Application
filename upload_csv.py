@@ -7,6 +7,7 @@ from pydantic import BaseModel
 from typing import Literal
 import yaml
 from pathlib import Path
+import streamlit_authenticator as stauth
 
 
 TYPE_MAPPINGS = {
