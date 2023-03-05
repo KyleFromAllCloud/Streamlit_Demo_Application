@@ -6,6 +6,7 @@ import os
 from pydantic import BaseModel
 from typing import Literal
 import yaml
+from yaml import SafeLoader
 from pathlib import Path
 import streamlit_authenticator as stauth
 
