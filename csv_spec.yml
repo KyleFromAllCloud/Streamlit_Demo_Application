@@ -16,31 +16,31 @@ columns:
     requirements:
       - not_null
   - name: '23-Jan'
-    type: int
+    type: integer
   - name: '23-Feb'
-    type: int
+    type: integer
   - name: '23-Mar'
-    type: int
+    type: integer
   - name: '23-Apr'
-    type: int
+    type: integer
   - name: '23-May'
-    type: int
+    type: integer
   - name: '23-Jun'
-    type: int
+    type: integer
   - name: '23-Jul'
-    type: int
+    type: integer
   - name: '23-Aug'
-    type: int
+    type: integer
   - name: '23-Sep'
-    type: int
+    type: integer
   - name: '23-Oct'
-    type: int
+    type: integer
   - name: '23-Nov'
-    type: int
+    type: integer
   - name: '23-Dec'
-    type: int
+    type: integer
   - name: Total
-    type: int
+    type: integer
     requirements:
       - not_null
   - name: 'New Logo/Existing Client'
