@@ -15,35 +15,35 @@ columns:
     type: string
     requirements:
       - not_null
-  - name: 23-Jan	
-    type: int	
-  - name: 23-Feb	
-    type: int	
-  - name: 23-Mar	
-    type: int	
-  - name: 23-Apr	
-    type: int	
-  - name: 23-May	
-    type: int	
-  - name: 23-Jun	
-    type: int	
-  - name: 23-Jul	
-    type: int	
-  - name: 23-Aug	
-    type: int	
-  - name: 23-Sep	
-    type: int	
-  - name: 23-Oct	
-    type: int	
-  - name: 23-Nov	
-    type: int	
-  - name: 23-Dec	
-    type: int	
-  - name: Total	
+  - name: '23-Jan'
+    type: int
+  - name: '23-Feb'
+    type: int
+  - name: '23-Mar'
+    type: int
+  - name: '23-Apr'
+    type: int
+  - name: '23-May'
+    type: int
+  - name: '23-Jun'
+    type: int
+  - name: '23-Jul'
+    type: int
+  - name: '23-Aug'
+    type: int
+  - name: '23-Sep'
+    type: int
+  - name: '23-Oct'
+    type: int
+  - name: '23-Nov'
+    type: int
+  - name: '23-Dec'
+    type: int
+  - name: Total
     type: int
     requirements:
       - not_null
-  - name: New Logo/Existing Client
+  - name: 'New Logo/Existing Client'
     type: string
     requirements:
       - not_null
