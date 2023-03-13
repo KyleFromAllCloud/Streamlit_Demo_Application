@@ -58,7 +58,6 @@ if st.session_state["authentication_status"]:
 
 
     conn = connector.connect(**st.secrets["snowflake"])
-    curs = conn.cursor()
 
 
     st.title('Upload CSV Demo')
@@ -68,7 +67,13 @@ if st.session_state["authentication_status"]:
     df = pd.DataFrame()
     tot_sql = "SELECT * FROM DEV_EDW_PSTG.DEMO_SCHEMA.STREAMLIT_ENTRY_DEMO;"
 
-    tot_df = conn.sql(tot_sql).to_pandas()
+    cur = conn.cursor()
+    cur.execute(tot_sql)
+
+    tot_df = cur.fetch_pandas_all()
+
+    cur.close()
+    cnn.close()
     
     edited_df = st.experimental_data_editor(tot_df)
     
