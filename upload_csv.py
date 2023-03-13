@@ -69,7 +69,7 @@ if st.session_state["authentication_status"]:
     df_editor = curs.execute('SELECT * FROM DEV_EDW_PSTG.DEMO_SCHEMA.STREAMLIT_ENTRY_DEMO').fetch_pandas_all()
     
 #     edited_df = st.experimental_data_editor(df_editor)
-    st.markdown(df_editor)
+    st.dataframe(df_editor)
     
     uploaded_file = st.file_uploader('Upload a file')
     if uploaded_file is not None:
