@@ -68,7 +68,7 @@ if st.session_state["authentication_status"]:
     df = pd.DataFrame()
     tot_sql = "SELECT * FROM DEV_EDW_PSTG.DEMO_SCHEMA.STREAMLIT_ENTRY_DEMO;"
 
-    tot_df = session.sql(tot_sql).to_pandas()
+    tot_df = conn.sql(tot_sql).to_pandas()
     
     edited_df = st.experimental_data_editor(tot_df)
     
