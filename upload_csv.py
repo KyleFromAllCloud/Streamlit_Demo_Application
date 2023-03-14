@@ -98,7 +98,7 @@ if st.session_state["authentication_status"]:
     # Uses st.experimental_singleton to only run once.
     @st.experimental_singleton
     def init_connection():
-        return connect(**st.secrets["snowflake"])
+        return connector.connect(**st.secrets["snowflake"])
     conn = init_connection()
     df = load_data()
     st.title("Dataframe with editable cells")
