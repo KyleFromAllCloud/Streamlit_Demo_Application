@@ -8,5 +8,5 @@ typing
 pyyaml
 pathlib
 streamlit-authenticator
-st_aggrid
+streamlit-aggrid
 pytz
