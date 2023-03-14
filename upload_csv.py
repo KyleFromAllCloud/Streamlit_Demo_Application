@@ -125,7 +125,7 @@ if st.session_state["authentication_status"]:
     gd = GridOptionsBuilder.from_dataframe(df)
     gd.configure_pagination(enabled=True)
     gd.configure_default_column(editable=True, groupable=True)
-    gd.configure_selection(selection_mode="multiple", use_checkbox=True)
+    gd.configure_selection(use_checkbox=False)
     gridoptions = gd.build()
     grid_table = AgGrid(
         df,
