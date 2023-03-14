@@ -11,6 +11,13 @@ from pathlib import Path
 import streamlit_authenticator as stauth
 from snowflake.connector.pandas_tools import write_pandas
 
+# The code below is for the title and logo.
+st.set_page_config(page_title="Dataframe with editable cells", page_icon="💾")
+st.image(
+    "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/325/floppy-disk_1f4be.png",
+    width=100,
+)
+
 with open('./login_config.yml') as file:
     config = yaml.load(file, Loader=SafeLoader)
     
@@ -92,14 +99,6 @@ if st.session_state["authentication_status"]:
     @st.experimental_singleton
     def init_connection():
         return connect(**st.secrets["snowflake"])
-
-
-    # The code below is for the title and logo.
-    st.set_page_config(page_title="Dataframe with editable cells", page_icon="💾")
-    st.image(
-        "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/325/floppy-disk_1f4be.png",
-        width=100,
-    )
     conn = init_connection()
     df = load_data()
     st.title("Dataframe with editable cells")
