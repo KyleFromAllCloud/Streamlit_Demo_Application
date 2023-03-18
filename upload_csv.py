@@ -25,6 +25,9 @@ from snowflake.snowpark import Session
 with open('./login_config.yml') as file:
     config = yaml.load(file, Loader=SafeLoader)
     
+with open('./creds.json') as config_file:
+    creds = json.load(config_file)
+    
 authenticator = stauth.Authenticate(
     config['credentials'],
     config['cookie']['name'],
@@ -223,7 +226,7 @@ if st.session_state["authentication_status"]:
         # connect to Snowflake
 #         session = connector.connect(**st.secrets["snowflake"])
 #         with open('creds.json') as f:
-#             connection_parameters = json.load(f)
+        connection_parameters = creds
         st.session_state.snowflake_connection = Session.builder.configs(**st.secrets["snowflake"]).create()
         session = st.session_state.snowflake_connection
     else:
