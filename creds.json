@@ -1,0 +1,9 @@
+{
+    "account": "baa92216.us-east-1",
+    "user": "KKEOUGH",
+    "password": "Vikings28452845@",
+    "role": "SYSADMIN",
+    "warehouse": "COMPUTE_WH",
+    "database": "DEV_EDW_PSTG",
+    "schema": "DEMO_SCHEMA"
+}
