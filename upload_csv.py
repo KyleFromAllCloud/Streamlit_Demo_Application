@@ -227,9 +227,9 @@ if st.session_state["authentication_status"]:
     #     session = st.session_state.snowflake_connection
     else:
         session = st.session_state.snowflake_connection
-    st.set_page_config(layout="centered", page_title="Data Editor", page_icon="🧮")
-    st.title("Snowflake Table Editor ❄️")
-    st.caption("This is a demo of the `st.experimental_data_editor`.")
+#     st.set_page_config(layout="centered", page_title="Data Editor", page_icon="🧮")
+#     st.title("Snowflake Table Editor ❄️")
+#     st.caption("This is a demo of the `st.experimental_data_editor`.")
     def get_dataset():
         # load messages df
         df = session.table("ESG_SCORES_DEMO")
