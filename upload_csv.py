@@ -220,11 +220,11 @@ if st.session_state["authentication_status"]:
 
     if 'snowflake_connection' not in st.session_state:
         # connect to Snowflake
-        session = connector.connect(**st.secrets["snowflake"])
-    #     with open('creds.json') as f:
-    #         connection_parameters = json.load(f)
-    #     st.session_state.snowflake_connection = Session.builder.configs(connection_parameters).create()
-    #     session = st.session_state.snowflake_connection
+#         session = connector.connect(**st.secrets["snowflake"])
+#         with open('creds.json') as f:
+#             connection_parameters = json.load(f)
+        st.session_state.snowflake_connection = Session.builder.configs(**st.secrets["snowflake"]).create()
+        session = st.session_state.snowflake_connection
     else:
         session = st.session_state.snowflake_connection
 #     st.set_page_config(layout="centered", page_title="Data Editor", page_icon="🧮")
