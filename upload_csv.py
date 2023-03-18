@@ -177,55 +177,9 @@ if st.session_state["authentication_status"]:
 #     st.header("File Specification")
 #     st.write(data_dict)
 
-#     df_file = pd.DataFrame()
-# #     tot_sql = "SELECT * FROM DEV_EDW_PSTG.DEMO_SCHEMA.STREAMLIT_ENTRY_DEMO;"
-
-# #     cur = conn.cursor().execute(tot_sql)
-# #     df_editor = pd.DataFrame.from_records(iter(cur), columns=[x[0] for x in cur.description])
-    
-# #     edited_df = st.experimental_data_editor(df_editor)
-    
-#     uploaded_file = st.file_uploader('Upload a file')
-#     if uploaded_file is not None:
-#         # read csv
-#         df_file = pd.read_csv(uploaded_file)
-
-#     # Validate File
-#     st.header("File Validation")
-#     is_valid = True
-#     for col in csv_spec.columns:
-#         if col.name not in df_file.columns:
-#             st.error(f"Column {col.name} is missing.")
-#             is_valid = False
-#         else:
-#             col_data = df_file[col.name]
-#             if TYPE_MAPPINGS.get(str(col_data.dtype), 'XXX') != col.type:
-#                 st.error(f"Column {col.name} must be of type {col.type}.")
-#                 is_valid = False
-#             for req in col.requirements:
-#                 pass_req = getattr(Requirement, req)(col_data)
-#                 if not pass_req:
-#                     st.error(f"Column {col.name} failed {req} requirement.")
-#                     is_valid = False
-
-#     st.write(df_file)
-
-
-#     btn_press = st.button('Submit Change', disabled=not is_valid)
-
-#     if btn_press:
-#         uploaded_cols = df_file.columns.to_list()
-#         st.write(uploaded_cols)
-
-#         if 'RequiredColumn' not in uploaded_cols:
-#             st.write("Failed - Missing column 'RequiredColumn'")
-#         else:
-#             success, nchunks, nrows, _ = write_pandas(conn, df_file, 'stauth_demo')
-#             st.write("Loaded!")
-
     if 'snowflake_connection' not in st.session_state:
         # connect to Snowflake
-#         session = connector.connect(**st.secrets["snowflake"])
+        conn = connector.connect(**st.secrets["snowflake"])
 #         with open('creds.json') as f:
         connection_parameters = creds
         st.session_state.snowflake_connection = Session.builder.configs(connection_parameters).create()
@@ -252,6 +206,53 @@ if st.session_state["authentication_status"]:
             st.warning("Error updating table")
     if st.button('Refresh'):
         st.experimental_rerun()
+        
+    
+    df_file = pd.DataFrame()
+#     tot_sql = "SELECT * FROM DEV_EDW_PSTG.DEMO_SCHEMA.STREAMLIT_ENTRY_DEMO;"
+
+#     cur = conn.cursor().execute(tot_sql)
+#     df_editor = pd.DataFrame.from_records(iter(cur), columns=[x[0] for x in cur.description])
+    
+#     edited_df = st.experimental_data_editor(df_editor)
+    
+    uploaded_file = st.file_uploader('Upload a file')
+    if uploaded_file is not None:
+        # read csv
+        df_file = pd.read_csv(uploaded_file)
+
+    # Validate File
+    st.header("File Validation")
+    is_valid = True
+    for col in csv_spec.columns:
+        if col.name not in df_file.columns:
+            st.error(f"Column {col.name} is missing.")
+            is_valid = False
+        else:
+            col_data = df_file[col.name]
+            if TYPE_MAPPINGS.get(str(col_data.dtype), 'XXX') != col.type:
+                st.error(f"Column {col.name} must be of type {col.type}.")
+                is_valid = False
+            for req in col.requirements:
+                pass_req = getattr(Requirement, req)(col_data)
+                if not pass_req:
+                    st.error(f"Column {col.name} failed {req} requirement.")
+                    is_valid = False
+
+    st.write(df_file)
+
+
+    btn_press = st.button('Submit Change', disabled=not is_valid)
+
+    if btn_press:
+        uploaded_cols = df_file.columns.to_list()
+        st.write(uploaded_cols)
+
+        if 'RequiredColumn' not in uploaded_cols:
+            st.write("Failed - Missing column 'RequiredColumn'")
+        else:
+            success, nchunks, nrows, _ = write_pandas(conn, df_file, 'STREAMLIT_ENTRY_DEMO')
+            st.write("Loaded!")
 
 elif st.session_state["authentication_status"] is False:
     st.error('Username/password is incorrect')
