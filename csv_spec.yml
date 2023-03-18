@@ -43,7 +43,7 @@ columns:
     type: integer
     requirements:
       - not_null
-  - name: 'New Logo/Existing Client'
+  - name: 'New Logo Existing Client'
     type: string
     requirements:
       - not_null
