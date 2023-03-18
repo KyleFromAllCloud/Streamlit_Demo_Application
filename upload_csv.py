@@ -237,7 +237,7 @@ if st.session_state["authentication_status"]:
 #     st.caption("This is a demo of the `st.experimental_data_editor`.")
     def get_dataset():
         # load messages df
-        df = session.table("ESG_SCORES_DEMO")
+        df = session.table("STREAMLIT_ENTRY_DEMO")
         return df
     dataset = get_dataset()
     with st.form("data_editor_form"):
