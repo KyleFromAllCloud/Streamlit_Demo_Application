@@ -45,31 +45,31 @@ if st.session_state["authentication_status"]:
         'object': 'string'
     }
 
-#     arr = np.array(['X', 'B', 'C'])
-#     # st.write(arr)
-#     if arr.dtype == object:
-#         print((arr == None).any())
+    arr = np.array(['X', 'B', 'C'])
+    # st.write(arr)
+    if arr.dtype == object:
+        print((arr == None).any())
 
 
-#     class Requirement:
-#         @staticmethod
-#         def not_null(arr: np.ndarray):
-#             li = arr.tolist()
-#             return not np.NaN in li
+    class Requirement:
+        @staticmethod
+        def not_null(arr: np.ndarray):
+            li = arr.tolist()
+            return not np.NaN in li
 
 
-#     class CsvColumn(BaseModel):
-#         name: str
-#         type: Literal['string', 'integer']
-#         requirements: list[str] = []
+    class CsvColumn(BaseModel):
+        name: str
+        type: Literal['string', 'integer']
+        requirements: list[str] = []
 
 
-#     class CsvSpec(BaseModel):
-#         columns: list[CsvColumn]
+    class CsvSpec(BaseModel):
+        columns: list[CsvColumn]
 
 
-#     data_dict = yaml.safe_load(Path('csv_spec.yml').open('r'))
-#     csv_spec = CsvSpec.parse_obj(data_dict)
+    data_dict = yaml.safe_load(Path('csv_spec.yml').open('r'))
+    csv_spec = CsvSpec.parse_obj(data_dict)
 
 
 # #     conn = connector.connect(**st.secrets["snowflake"])
