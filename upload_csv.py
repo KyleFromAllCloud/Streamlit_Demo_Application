@@ -44,35 +44,35 @@ if st.session_state["authentication_status"]:
         'int64': 'integer',
         'object': 'string'
     }
-    if 'snowflake_connection' not in st.session_state:
-        # connect to Snowflake
-        conn = connector.connect(**st.secrets["snowflake"])
-#         with open('creds.json') as f:
-        connection_parameters = creds
-        st.session_state.snowflake_connection = Session.builder.configs(connection_parameters).create()
-        session = st.session_state.snowflake_connection
-    else:
-        session = st.session_state.snowflake_connection
-#     st.set_page_config(layout="centered", page_title="Data Editor", page_icon="🧮")
-#     st.title("Snowflake Table Editor ❄️")
-#     st.caption("This is a demo of the `st.experimental_data_editor`.")
-    def get_dataset():
-        # load messages df
-        df = session.table("STREAMLIT_ENTRY_DEMO")
-        return df
-    dataset = get_dataset()
-    with st.form("data_editor_form"):
-        st.caption("Edit the dataframe below")
-        edited = st.experimental_data_editor(dataset, use_container_width=True, num_rows="dynamic")
-        submit_button = st.form_submit_button("Submit")
-    if submit_button:
-        try:
-            session.write_pandas(edited, "STREAMLIT_ENTRY_DEMO", overwrite=True)
-            st.success("Table updated")
-        except:
-            st.warning("Error updating table")
-    if st.button('Refresh'):
-        st.experimental_rerun()
+#     if 'snowflake_connection' not in st.session_state:
+#         # connect to Snowflake
+#         conn = connector.connect(**st.secrets["snowflake"])
+# #         with open('creds.json') as f:
+#         connection_parameters = creds
+#         st.session_state.snowflake_connection = Session.builder.configs(connection_parameters).create()
+#         session = st.session_state.snowflake_connection
+#     else:
+#         session = st.session_state.snowflake_connection
+# #     st.set_page_config(layout="centered", page_title="Data Editor", page_icon="🧮")
+# #     st.title("Snowflake Table Editor ❄️")
+# #     st.caption("This is a demo of the `st.experimental_data_editor`.")
+#     def get_dataset():
+#         # load messages df
+#         df = session.table("STREAMLIT_ENTRY_DEMO")
+#         return df
+#     dataset = get_dataset()
+#     with st.form("data_editor_form"):
+#         st.caption("Edit the dataframe below")
+#         edited = st.experimental_data_editor(dataset, use_container_width=True, num_rows="dynamic")
+#         submit_button = st.form_submit_button("Submit")
+#     if submit_button:
+#         try:
+#             session.write_pandas(edited, "STREAMLIT_ENTRY_DEMO", overwrite=True)
+#             st.success("Table updated")
+#         except:
+#             st.warning("Error updating table")
+#     if st.button('Refresh'):
+#         st.experimental_rerun()
         
     TYPE_MAPPINGS = {
     'int64': 'integer',
