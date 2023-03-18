@@ -250,8 +250,8 @@ if st.session_state["authentication_status"]:
             st.success("Table updated")
         except:
             st.warning("Error updating table")
-    refresh_button = st.button('Refresh')
-    refresh_button.on_click(st.experimental_rerun())
+    if st.button('Refresh'):
+        st.experimental_rerun()
 
 elif st.session_state["authentication_status"] is False:
     st.error('Username/password is incorrect')
