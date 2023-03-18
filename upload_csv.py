@@ -13,6 +13,7 @@ from snowflake.connector.pandas_tools import write_pandas
 from pytz import country_names
 from st_aggrid import AgGrid, GridUpdateMode, JsCode
 from st_aggrid.grid_options_builder import GridOptionsBuilder
+from snowflake.snowpark import Session
 
 # The code below is for the title and logo.
 # st.set_page_config(page_title="Dataframe with editable cells", page_icon="💾")
