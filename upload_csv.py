@@ -23,6 +23,33 @@ from snowflake.snowpark import Session
 #     width=100,
 # )
 
+TYPE_MAPPINGS = {
+'int64': 'integer',
+'object': 'string'
+}
+
+arr = np.array(['X', 'B', 'C'])
+# st.write(arr)
+if arr.dtype == object:
+    print((arr == None).any())
+
+
+class Requirement:
+    @staticmethod
+    def not_null(arr: np.ndarray):
+        li = arr.tolist()
+        return not np.NaN in li
+
+
+class CsvColumn(BaseModel):
+    name: str
+    type: Literal['string', 'integer']
+    requirements: list[str] = []
+
+
+class CsvSpec(BaseModel):
+    columns: list[CsvColumn]
+
 with open('./login_config.yml') as file:
     config = yaml.load(file, Loader=SafeLoader)
     
@@ -74,67 +101,28 @@ if st.session_state["authentication_status"]:
     if st.button('Refresh'):
         st.experimental_rerun()
         
-    TYPE_MAPPINGS = {
-    'int64': 'integer',
-    'object': 'string'
-    }
-
-    arr = np.array(['X', 'B', 'C'])
-    # st.write(arr)
-    if arr.dtype == object:
-        print((arr == None).any())
-
-
-    class Requirement:
-        @staticmethod
-        def not_null(arr: np.ndarray):
-            li = arr.tolist()
-            return not np.NaN in li
-
-
-    class CsvColumn(BaseModel):
-        name: str
-        type: Literal['string', 'integer']
-#         requirements: list[str] = []
-
-
-    class CsvSpec(BaseModel):
-        columns: list[CsvColumn]
-
 
     data_dict = yaml.safe_load(Path('csv_spec.yml').open('r'))
     csv_spec = CsvSpec.parse_obj(data_dict)
 
-
-    conn = connector.connect(
-        user=os.environ['SNOWFLAKE_USER'],
-        password=os.environ['SNOWFLAKE_PASSWORD'],
-        account='baa92216.us-east-1',
-        role='STREAMLIT_DEVELOPER',
-        warehouse='WH_STREAMLIT_DEMO'
-    )
-
-
-    st.title('Upload CSV Demo')
-    st.header("File Specification")
     st.write(data_dict)
 
-    df = pd.DataFrame()
+    df_file = pd.DataFrame()
 
     uploaded_file = st.file_uploader('Upload a file')
     if uploaded_file is not None:
         # read csv
-        df = pd.read_csv(uploaded_file)
+        df_file = pd.read_csv(uploaded_file)
 
     # Validate File
     st.header("File Validation")
     is_valid = True
     for col in csv_spec.columns:
-        if col.name not in df.columns:
+        if col.name not in df_file.columns:
             st.error(f"Column {col.name} is missing.")
             is_valid = False
         else:
-            col_data = df[col.name]
+            col_data = df_file[col.name]
             if TYPE_MAPPINGS.get(str(col_data.dtype), 'XXX') != col.type:
                 st.error(f"Column {col.name} must be of type {col.type}.")
                 is_valid = False
@@ -144,13 +132,13 @@ if st.session_state["authentication_status"]:
                     st.error(f"Column {col.name} failed {req} requirement.")
                     is_valid = False
 
-    st.write(df)
+    st.write(df_file)
 
 
     btn_press = st.button('Submit Change', disabled=not is_valid)
 
     if btn_press:
-        uploaded_cols = df.columns.to_list()
+        uploaded_cols = df_file.columns.to_list()
         st.write(uploaded_cols)
 
         if 'RequiredColumn' not in uploaded_cols:
