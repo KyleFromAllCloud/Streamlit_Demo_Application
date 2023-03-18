@@ -228,7 +228,7 @@ if st.session_state["authentication_status"]:
 #         session = connector.connect(**st.secrets["snowflake"])
 #         with open('creds.json') as f:
         connection_parameters = creds
-        st.session_state.snowflake_connection = Session.builder.configs(**st.secrets["snowflake"]).create()
+        st.session_state.snowflake_connection = Session.builder.configs(connection_parameters).create()
         session = st.session_state.snowflake_connection
     else:
         session = st.session_state.snowflake_connection
