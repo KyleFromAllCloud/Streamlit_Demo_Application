@@ -45,17 +45,17 @@ if st.session_state["authentication_status"]:
         'object': 'string'
     }
 
-    arr = np.array(['X', 'B', 'C'])
-    # st.write(arr)
-    if arr.dtype == object:
-        print((arr == None).any())
+#     arr = np.array(['X', 'B', 'C'])
+#     # st.write(arr)
+#     if arr.dtype == object:
+#         print((arr == None).any())
 
 
-    class Requirement:
-        @staticmethod
-        def not_null(arr: np.ndarray):
-            li = arr.tolist()
-            return not np.NaN in li
+#     class Requirement:
+#         @staticmethod
+#         def not_null(arr: np.ndarray):
+#             li = arr.tolist()
+#             return not np.NaN in li
 
 
     class CsvColumn(BaseModel):
