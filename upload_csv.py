@@ -41,13 +41,7 @@ data_dict = yaml.safe_load(Path('csv_spec.yml').open('r'))
 csv_spec = CsvSpec.parse_obj(data_dict)
 
 
-conn = connector.connect(
-    user=os.environ['SNOWFLAKE_USER'],
-    password=os.environ['SNOWFLAKE_PASSWORD'],
-    account='baa92216.us-east-1',
-    role='STREAMLIT_DEVELOPER',
-    warehouse='WH_STREAMLIT_DEMO'
-)
+conn = connector.connect(**st.secrets["snowflake"])
 
 
 st.title('Upload CSV Demo')
