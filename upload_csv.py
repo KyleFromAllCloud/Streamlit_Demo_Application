@@ -139,11 +139,12 @@ if st.session_state["authentication_status"]:
 #                           , disabled=not is_valid)
 
     if btn_press:
-        uploaded_cols = df_file.columns.to_list()
-        st.write(uploaded_cols)
+        session.write_pandas(df_file, "STREAMLIT_ENTRY_DEMO", overwrite=False)
+#         uploaded_cols = df_file.columns.to_list()
+#         st.write(uploaded_cols)
 
 #         if 'RequiredColumn' not in uploaded_cols:
-        st.write("Failed - Missing column 'RequiredColumn'")
+#         st.write("Failed - Missing column 'RequiredColumn'")
 #         else:
 #             st.write("Loaded!")
 
