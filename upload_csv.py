@@ -135,7 +135,8 @@ if st.session_state["authentication_status"]:
     st.write(df_file)
 
 
-    btn_press = st.button('Submit Change', disabled=not is_valid)
+    btn_press = st.button('Submit Change')
+#                           , disabled=not is_valid)
 
     if btn_press:
         uploaded_cols = df_file.columns.to_list()
