@@ -105,7 +105,7 @@ if st.session_state["authentication_status"]:
 #     data_dict = yaml.safe_load(Path('csv_spec.yml').open('r'))
 #     csv_spec = CsvSpec.parse_obj(data_dict)
 
-    st.write(data_dict)
+#     st.write(data_dict)
 
     df_file = pd.DataFrame()
 
