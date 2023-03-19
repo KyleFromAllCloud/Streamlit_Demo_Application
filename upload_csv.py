@@ -73,10 +73,10 @@ if st.session_state["authentication_status"]:
     if 'snowflake_connection' not in st.session_state:
         # connect to Snowflake
         conn = connector.connect(**st.secrets["snowflake"])
-# #         with open('creds.json') as f:
-#         connection_parameters = creds
-#         st.session_state.snowflake_connection = Session.builder.configs(connection_parameters).create()
-#         session = st.session_state.snowflake_connection
+#         with open('creds.json') as f:
+        connection_parameters = creds
+        st.session_state.snowflake_connection = Session.builder.configs(connection_parameters).create()
+        session = st.session_state.snowflake_connection
     else:
         session = st.session_state.snowflake_connection
 #     st.set_page_config(layout="centered", page_title="Data Editor", page_icon="🧮")
@@ -84,7 +84,7 @@ if st.session_state["authentication_status"]:
 #     st.caption("This is a demo of the `st.experimental_data_editor`.")
     def get_dataset():
         # load messages df
-        df = conn.table("STREAMLIT_ENTRY_DEMO")
+        df = session.table("STREAMLIT_ENTRY_DEMO")
         return df
     dataset = get_dataset()
     with st.form("data_editor_form"):
