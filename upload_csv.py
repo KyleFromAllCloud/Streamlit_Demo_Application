@@ -145,9 +145,9 @@ btn_press = st.button('Submit Change')
 
 if btn_press:
     time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+    session.write_pandas(df_file, "STREAMLIT_ENTRY_DEMO", overwrite=True)
     df_file_hist = df_file
     df_file_hist['LAST_UPDATED'] = time
-    session.write_pandas(df_file, "STREAMLIT_ENTRY_DEMO", overwrite=True)
     session.write_pandas(df_file_hist, "STREAMLIT_ENTRY_DEMO_HISTORICAL", overwrite=False)
 #         uploaded_cols = df_file.columns.to_list()
 #         st.write(uploaded_cols)
