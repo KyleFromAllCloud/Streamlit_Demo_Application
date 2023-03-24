@@ -54,8 +54,8 @@ from datetime import datetime
 # with open('./login_config.yml') as file:
 #     config = yaml.load(file, Loader=SafeLoader)
     
-# with open('./creds.json') as config_file:
-#     creds = json.load(config_file)
+with open('./creds.json') as config_file:
+    creds = json.load(config_file)
     
 # authenticator = stauth.Authenticate(
 #     config['credentials'],
