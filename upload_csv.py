@@ -51,73 +51,73 @@ from datetime import datetime
 # class CsvSpec(BaseModel):
 #     columns: list[CsvColumn]
 
-with open('./login_config.yml') as file:
-    config = yaml.load(file, Loader=SafeLoader)
+# with open('./login_config.yml') as file:
+#     config = yaml.load(file, Loader=SafeLoader)
     
-with open('./creds.json') as config_file:
-    creds = json.load(config_file)
+# with open('./creds.json') as config_file:
+#     creds = json.load(config_file)
     
-authenticator = stauth.Authenticate(
-    config['credentials'],
-    config['cookie']['name'],
-    config['cookie']['key'],
-    config['cookie']['expiry_days']
-)
+# authenticator = stauth.Authenticate(
+#     config['credentials'],
+#     config['cookie']['name'],
+#     config['cookie']['key'],
+#     config['cookie']['expiry_days']
+# )
 
-name, authentication_status, username = authenticator.login('Login', 'main')
+# name, authentication_status, username = authenticator.login('Login', 'main')
 
-if st.session_state["authentication_status"]:
-    authenticator.logout('Logout', 'main')
-    TYPE_MAPPINGS = {
-        'int64': 'integer',
-        'object': 'string'
-    }
-    if 'snowflake_connection' not in st.session_state:
-        # connect to Snowflake
-        conn = connector.connect(**st.secrets["snowflake"])
+# if st.session_state["authentication_status"]:
+#     authenticator.logout('Logout', 'main')
+TYPE_MAPPINGS = {
+    'int64': 'integer',
+    'object': 'string'
+}
+if 'snowflake_connection' not in st.session_state:
+    # connect to Snowflake
+    conn = connector.connect(**st.secrets["snowflake"])
 #         with open('creds.json') as f:
-        connection_parameters = creds
-        st.session_state.snowflake_connection = Session.builder.configs(connection_parameters).create()
-        session = st.session_state.snowflake_connection
-    else:
-        session = st.session_state.snowflake_connection
+    connection_parameters = creds
+    st.session_state.snowflake_connection = Session.builder.configs(connection_parameters).create()
+    session = st.session_state.snowflake_connection
+else:
+    session = st.session_state.snowflake_connection
 #     st.set_page_config(layout="centered", page_title="Data Editor", page_icon="🧮")
 #     st.title("Snowflake Table Editor ❄️")
 #     st.caption("This is a demo of the `st.experimental_data_editor`.")
-    def get_dataset():
-        # load messages df
-        df = session.table("STREAMLIT_ENTRY_DEMO")
-        return df
-    dataset = get_dataset()
-    with st.form("data_editor_form"):
-        st.caption("Edit the dataframe below")
-        edited = st.experimental_data_editor(dataset, use_container_width=True, num_rows="dynamic")
-        submit_button = st.form_submit_button("Submit")
-    if submit_button:
-        try:
-            session.write_pandas(edited, "STREAMLIT_ENTRY_DEMO", overwrite=True)
-            time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-            edited_hist = edited
-            edited_hist['LAST_UPDATED'] = time 
-            session.write_pandas(edited_hist, "STREAMLIT_ENTRY_DEMO_HISTORICAL", overwrite=False)
-            st.success("Table updated")
-        except:
-            st.warning("Error updating table")
-    if st.button('Refresh'):
-        st.experimental_rerun()
-        
+def get_dataset():
+    # load messages df
+    df = session.table("STREAMLIT_ENTRY_DEMO")
+    return df
+dataset = get_dataset()
+with st.form("data_editor_form"):
+    st.caption("Edit the dataframe below")
+    edited = st.experimental_data_editor(dataset, use_container_width=True, num_rows="dynamic")
+    submit_button = st.form_submit_button("Submit")
+if submit_button:
+    try:
+        session.write_pandas(edited, "STREAMLIT_ENTRY_DEMO", overwrite=True)
+        time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+        edited_hist = edited
+        edited_hist['LAST_UPDATED'] = time 
+        session.write_pandas(edited_hist, "STREAMLIT_ENTRY_DEMO_HISTORICAL", overwrite=False)
+        st.success("Table updated")
+    except:
+        st.warning("Error updating table")
+if st.button('Refresh'):
+    st.experimental_rerun()
+
 
 #     data_dict = yaml.safe_load(Path('csv_spec.yml').open('r'))
 #     csv_spec = CsvSpec.parse_obj(data_dict)
 
 #     st.write(data_dict)
 
-    df_file = pd.DataFrame()
+df_file = pd.DataFrame()
 
-    uploaded_file = st.file_uploader('Upload a file')
-    if uploaded_file is not None:
-        # read csv
-        df_file = pd.read_csv(uploaded_file)
+uploaded_file = st.file_uploader('Upload a file')
+if uploaded_file is not None:
+    # read csv
+    df_file = pd.read_csv(uploaded_file)
 
 #     # Validate File
 #     st.header("File Validation")
@@ -137,18 +137,18 @@ if st.session_state["authentication_status"]:
 #                     st.error(f"Column {col.name} failed {req} requirement.")
 #                     is_valid = False
 
-    st.write(df_file)
+st.write(df_file)
 
 
-    btn_press = st.button('Submit Change')
+btn_press = st.button('Submit Change')
 #                           , disabled=not is_valid)
 
-    if btn_press:
-        time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-        df_file_hist = df_file
-        df_file_hist['LAST_UPDATED'] = time
-        session.write_pandas(df_file, "STREAMLIT_ENTRY_DEMO", overwrite=True)
-        session.write_pandas(df_file_hist, "STREAMLIT_ENTRY_DEMO_HISTORICAL", overwrite=False)
+if btn_press:
+    time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+    df_file_hist = df_file
+    df_file_hist['LAST_UPDATED'] = time
+    session.write_pandas(df_file, "STREAMLIT_ENTRY_DEMO", overwrite=True)
+    session.write_pandas(df_file_hist, "STREAMLIT_ENTRY_DEMO_HISTORICAL", overwrite=False)
 #         uploaded_cols = df_file.columns.to_list()
 #         st.write(uploaded_cols)
 
@@ -158,7 +158,7 @@ if st.session_state["authentication_status"]:
 #             st.write("Loaded!")
 
        
-elif st.session_state["authentication_status"] is False:
-    st.error('Username/password is incorrect')
-elif st.session_state["authentication_status"] is None:
-    st.warning('Please enter your username and password')
+# elif st.session_state["authentication_status"] is False:
+#     st.error('Username/password is incorrect')
+# elif st.session_state["authentication_status"] is None:
+#     st.warning('Please enter your username and password')
