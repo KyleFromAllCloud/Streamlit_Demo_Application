@@ -15,6 +15,7 @@ from pytz import country_names
 from st_aggrid import AgGrid, GridUpdateMode, JsCode
 from st_aggrid.grid_options_builder import GridOptionsBuilder
 from snowflake.snowpark.session import Session
+from datetime import datetime
 
 # The code below is for the title and logo.
 # st.set_page_config(page_title="Dataframe with editable cells", page_icon="💾")
@@ -95,6 +96,10 @@ if st.session_state["authentication_status"]:
     if submit_button:
         try:
             session.write_pandas(edited, "STREAMLIT_ENTRY_DEMO", overwrite=True)
+            time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+            edited_hist = edited
+            edited_hist['LAST_UPDATED'] = time 
+            session.write_pandas(edited_hist, "STREAMLIT_ENTRY_DEMO_HISTORICAL", overwrite=False)
             st.success("Table updated")
         except:
             st.warning("Error updating table")
@@ -139,7 +144,11 @@ if st.session_state["authentication_status"]:
 #                           , disabled=not is_valid)
 
     if btn_press:
-        session.write_pandas(df_file, "STREAMLIT_ENTRY_DEMO", overwrite=False)
+        time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+        df_file_hist = df_file
+        df_file_hist['LAST_UPDATED'] = time
+        session.write_pandas(df_file, "STREAMLIT_ENTRY_DEMO", overwrite=True)
+        session.write_pandas(df_file_hist, "STREAMLIT_ENTRY_DEMO_HISTORICAL", overwrite=False)
 #         uploaded_cols = df_file.columns.to_list()
 #         st.write(uploaded_cols)
 
