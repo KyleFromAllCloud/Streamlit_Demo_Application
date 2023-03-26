@@ -22,6 +22,10 @@ def get_forward_month_list():
     now = datetime.now()
     return [(now + relativedelta(months=i)).strftime('%b') for i in range(12)]
 
+def get_forward_month_year_list():
+    now = datetime.now()
+    return [(now + relativedelta(months=i)).strftime('%y-%b') for i in range(12)]
+
 # The code below is for the title and logo.
 # st.set_page_config(page_title="Dataframe with editable cells", page_icon="💾")
 # st.image(
@@ -93,9 +97,15 @@ def get_dataset():
     # load messages df
     df = session.table("FORECAST_RBC")
     months = get_forward_month_list()
+    months_years = get_forward_month_year_list()
+    cols = {months[i]: months_years[i] for i in range(len(months))}
     months = ['BU', 'PORTFOLIO', 'CLIENT', 'OPPORTUNITY'] + months
     months = months + ['TOTAL', 'EXISTINGCLIENTNEWLOGO']
-    df = df[months]
+#     df = df[months]
+#     df.rename(columns={"JAN": "23-JAN","FEB": "23-FEB", "MAR": "23-MAR", "APR": "23-APR", 
+#                       "MAY": "23-MAY", "JUN": "23-JUN", "JUL": "23-JUL", "AUG": "23-AUG", 
+#                       "SEP": "23-SEP", "OCT": "23-OCT", "NOV": "23-NOV", "DEC": "23-DEC", })
+    df.rename(columns = cols)
     return df
 dataset = get_dataset()
 with st.form("data_editor_form"):
