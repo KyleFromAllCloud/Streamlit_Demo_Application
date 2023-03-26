@@ -26,6 +26,10 @@ def get_forward_month_year_list():
     now = datetime.now()
     return [(now + relativedelta(months=i)).strftime('%y-%b') for i in range(12)]
 
+months = get_forward_month_list()
+months_years = get_forward_month_year_list()
+cols = {months[i]: months_years[i] for i in range(len(months))}
+
 # The code below is for the title and logo.
 # st.set_page_config(page_title="Dataframe with editable cells", page_icon="💾")
 # st.image(
@@ -96,12 +100,9 @@ else:
 def get_dataset():
     # load messages df
     df = session.table("FORECAST_RBC")
-    months = get_forward_month_list()
-    months_years = get_forward_month_year_list()
-    cols = {months[i]: months_years[i] for i in range(len(months))}
-    months = ['BU', 'PORTFOLIO', 'CLIENT', 'OPPORTUNITY'] + months
-    months = months + ['TOTAL', 'EXISTINGCLIENTNEWLOGO']
-    df = df[months]
+    col_list = ['BU', 'PORTFOLIO', 'CLIENT', 'OPPORTUNITY'] + months
+    col_list = col_list + ['TOTAL', 'EXISTINGCLIENTNEWLOGO']
+    df = df[col_list]
 #     df.rename(columns={"JAN": "23-JAN","FEB": "23-FEB", "MAR": "23-MAR", "APR": "23-APR", 
 #                       "MAY": "23-MAY", "JUN": "23-JUN", "JUL": "23-JUL", "AUG": "23-AUG", 
 #                       "SEP": "23-SEP", "OCT": "23-OCT", "NOV": "23-NOV", "DEC": "23-DEC", })
@@ -116,6 +117,8 @@ with st.form("data_editor_form"):
     submit_button = st.form_submit_button("Submit")
 if submit_button:
     try:
+        for i in cols:
+            edited = edited.with_column_renamed(cols[i], i)
         session.write_pandas(edited, "FORECAST_RBC", overwrite=True)
         time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
         edited_hist = edited
