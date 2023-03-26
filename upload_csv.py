@@ -108,6 +108,7 @@ def get_dataset():
     for i in cols:
         df = df.with_column_renamed(f'"{i}"', f'"{cols[i]}"')
 #     df = df.rename(cols)
+    st.dataframe(df)
     return df
 dataset = get_dataset()
 with st.form("data_editor_form"):
