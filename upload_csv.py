@@ -15,7 +15,12 @@ from pytz import country_names
 from st_aggrid import AgGrid, GridUpdateMode, JsCode
 from st_aggrid.grid_options_builder import GridOptionsBuilder
 from snowflake.snowpark.session import Session
-from datetime import datetime
+from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
+
+def get_forward_month_list():
+    now = datetime.now()
+    return [(now + relativedelta(months=i)).strftime('%b') for i in range(12)]
 
 # The code below is for the title and logo.
 # st.set_page_config(page_title="Dataframe with editable cells", page_icon="💾")
@@ -86,7 +91,11 @@ else:
 #     st.caption("This is a demo of the `st.experimental_data_editor`.")
 def get_dataset():
     # load messages df
-    df = session.table("STREAMLIT_ENTRY_DEMO")
+    df = session.table("FORECAST_RBC")
+    months = get_forward_month_list()
+    months.appendleft(['BU', 'PORTFOLIO', 'CLIENT', 'OPPORTUNITY'])
+    months.appendright(['TOTAL', 'EXISTINGCLIENTNEWLOGO'])
+    df = df['months']
     return df
 dataset = get_dataset()
 with st.form("data_editor_form"):
@@ -95,11 +104,11 @@ with st.form("data_editor_form"):
     submit_button = st.form_submit_button("Submit")
 if submit_button:
     try:
-        session.write_pandas(edited, "STREAMLIT_ENTRY_DEMO", overwrite=True)
+        session.write_pandas(edited, "FORECAST_RBC", overwrite=True)
         time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
         edited_hist = edited
         edited_hist['LAST_UPDATED'] = time 
-        session.write_pandas(edited_hist, "STREAMLIT_ENTRY_DEMO_HISTORICAL", overwrite=False)
+        session.write_pandas(edited_hist, "FORECAST_RBC_HISTORICAL", overwrite=False)
         st.success("Table updated")
     except:
         st.warning("Error updating table")
@@ -145,10 +154,10 @@ btn_press = st.button('Submit Change')
 
 if btn_press:
     time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-    session.write_pandas(df_file, "STREAMLIT_ENTRY_DEMO", overwrite=True)
+    session.write_pandas(df_file, "FORECAST_RBC", overwrite=True)
     df_file_hist = df_file
     df_file_hist['LAST_UPDATED'] = time
-    session.write_pandas(df_file_hist, "STREAMLIT_ENTRY_DEMO_HISTORICAL", overwrite=False)
+    session.write_pandas(df_file_hist, "FORECAST_RBC_HISTORICAL", overwrite=False)
 #         uploaded_cols = df_file.columns.to_list()
 #         st.write(uploaded_cols)
 
