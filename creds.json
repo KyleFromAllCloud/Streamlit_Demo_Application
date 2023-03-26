@@ -1,9 +1,9 @@
 {
-    "account": "baa92216.us-east-1",
-    "user": "KKEOUGH",
-    "password": "Vikings28452845@",
-    "role": "SYSADMIN",
-    "warehouse": "COMPUTE_WH",
-    "database": "DEV_EDW_PSTG",
-    "schema": "DEMO_SCHEMA"
+account: "blb42788.us-east-1"
+user: "KYLEKEOUGH"
+password: "Vikings28452845@"
+role: "RL_XFRMR_PRD"
+warehouse: "WH_XFRMR_PRD"
+database: "PRD_EDW_INFOMART"
+schema: "MANUAL_INPUTS"
 }
