@@ -95,7 +95,7 @@ def get_dataset():
     months = get_forward_month_list()
     months = ['BU', 'PORTFOLIO', 'CLIENT', 'OPPORTUNITY'] + months
     months = months + ['TOTAL', 'EXISTINGCLIENTNEWLOGO']
-    df = df['months']
+    df = df[months]
     return df
 dataset = get_dataset()
 with st.form("data_editor_form"):
