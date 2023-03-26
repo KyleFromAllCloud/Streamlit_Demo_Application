@@ -106,9 +106,8 @@ def get_dataset():
 #                       "MAY": "23-MAY", "JUN": "23-JUN", "JUL": "23-JUL", "AUG": "23-AUG", 
 #                       "SEP": "23-SEP", "OCT": "23-OCT", "NOV": "23-NOV", "DEC": "23-DEC", })
     for i in cols:
-        df = df.with_column_renamed(f'"{i}"', f'"{cols[i]}"')
+        df = df.with_column_renamed(i, cols[i])
 #     df = df.rename(cols)
-    st.dataframe(df)
     return df
 dataset = get_dataset()
 with st.form("data_editor_form"):
