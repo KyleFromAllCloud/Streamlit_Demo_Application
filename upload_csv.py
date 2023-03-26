@@ -93,8 +93,8 @@ def get_dataset():
     # load messages df
     df = session.table("FORECAST_RBC")
     months = get_forward_month_list()
-    months.appendleft(['BU', 'PORTFOLIO', 'CLIENT', 'OPPORTUNITY'])
-    months.appendright(['TOTAL', 'EXISTINGCLIENTNEWLOGO'])
+    months = ['BU', 'PORTFOLIO', 'CLIENT', 'OPPORTUNITY'] + months
+    months = months + ['TOTAL', 'EXISTINGCLIENTNEWLOGO']
     df = df['months']
     return df
 dataset = get_dataset()
