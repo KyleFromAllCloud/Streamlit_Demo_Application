@@ -101,7 +101,7 @@ def get_dataset():
     cols = {months[i]: months_years[i] for i in range(len(months))}
     months = ['BU', 'PORTFOLIO', 'CLIENT', 'OPPORTUNITY'] + months
     months = months + ['TOTAL', 'EXISTINGCLIENTNEWLOGO']
-#     df = df[months]
+    df = df[months]
 #     df.rename(columns={"JAN": "23-JAN","FEB": "23-FEB", "MAR": "23-MAR", "APR": "23-APR", 
 #                       "MAY": "23-MAY", "JUN": "23-JUN", "JUL": "23-JUL", "AUG": "23-AUG", 
 #                       "SEP": "23-SEP", "OCT": "23-OCT", "NOV": "23-NOV", "DEC": "23-DEC", })
