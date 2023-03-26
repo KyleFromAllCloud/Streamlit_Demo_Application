@@ -119,6 +119,7 @@ if submit_button:
     try:
         for i in cols:
             edited = edited.with_column_renamed(cols[i], i)
+        st.dataframe(edited)
         session.write_pandas(edited, "FORECAST_RBC", overwrite=True)
         time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
         edited_hist = edited
