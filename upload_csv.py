@@ -106,7 +106,7 @@ def get_dataset():
 #                       "MAY": "23-MAY", "JUN": "23-JUN", "JUL": "23-JUL", "AUG": "23-AUG", 
 #                       "SEP": "23-SEP", "OCT": "23-OCT", "NOV": "23-NOV", "DEC": "23-DEC", })
     for i in cols:
-        df = df.with_column_renamed(col(f'"{i}"'), f'"{cols[i}"')
+        df = df.with_column_renamed(col(f'"{i}"'), f'"{cols[i]}"')
 #     df = df.rename(cols)
     return df
 dataset = get_dataset()
