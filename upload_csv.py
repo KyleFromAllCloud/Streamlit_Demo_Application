@@ -118,7 +118,8 @@ with st.form("data_editor_form"):
 # if submit_button:
 #     try:
 for i in cols:
-    edited = edited.with_column_renamed(cols[i], i)
+    edited = edited.rename(columns={cols[i]: i})
+#     df.rename(columns={"A": "a", "B": "c"})
 st.dataframe(edited)
 #         session.write_pandas(edited, "FORECAST_RBC", overwrite=True)
 #         time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
