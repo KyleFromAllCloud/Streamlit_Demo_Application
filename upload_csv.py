@@ -122,7 +122,7 @@ if submit_button:
         edited = edited.rename(columns={cols[i]: i})
 #     df.rename(columns={"A": "a", "B": "c"})
 #         st.dataframe(edited)
-    edited = edited[cols_sorted]
+    edited = edited[[cols_sorted]]
     session.write_pandas(edited, "FORECAST_RBC", overwrite=True)
     time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
     edited_hist = edited
