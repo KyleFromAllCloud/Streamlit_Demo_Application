@@ -28,7 +28,7 @@ def get_forward_month_year_list():
 
 months = get_forward_month_list()
 months_years = get_forward_month_year_list()
-cols = {months[i]: months_years[i] for i in range(len(months))}
+cols = {months[i].upper(): months_years[i].upper() for i in range(len(months))}
 cols_sorted = ['BU', 'PORTFOLIO', 'CLIENT', 'OPPORTUNITY', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC', 'TOTAL', 'EXISTINGCLIENTNEWLOGO']
 
 # The code below is for the title and logo.
