@@ -118,22 +118,22 @@ with st.form("data_editor_form"):
     edited = st.experimental_data_editor(dataset, use_container_width=True, num_rows="dynamic")
     submit_button = st.form_submit_button("Submit")
 if submit_button:
-#     try:
-    for i in cols:
-        edited = edited.rename(columns={cols[i]: i})
-#     st.dataframe(edited)
-#     df.rename(columns={"A": "a", "B": "c"})
-#         st.dataframe(edited)
-#     edited = edited[[cols_sorted]]
-    session.write_pandas(edited, "FORECAST_RBC", overwrite=True)
-    time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-    edited_hist = edited
-    edited_hist = edited_hist.reindex(columns = cols_sorted)
-    edited_hist['LAST_UPDATED'] = time 
-    session.write_pandas(edited_hist, "FORECAST_RBC_HISTORICAL", overwrite=False)
-    st.success("Table updated")
-#     except:
-#         st.warning("Error updating table")
+    try:
+        for i in cols:
+            edited = edited.rename(columns={cols[i]: i})
+    #     st.dataframe(edited)
+    #     df.rename(columns={"A": "a", "B": "c"})
+    #         st.dataframe(edited)
+    #     edited = edited[[cols_sorted]]
+        session.write_pandas(edited, "FORECAST_RBC", overwrite=True)
+        time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+        edited_hist = edited
+        edited_hist = edited_hist.reindex(columns = cols_sorted)
+        edited_hist['LAST_UPDATED'] = time 
+        session.write_pandas(edited_hist, "FORECAST_RBC_HISTORICAL", overwrite=False)
+        st.success("Table updated")
+    except:
+        st.warning("Error updating table")
 if st.button('Refresh'):
     st.experimental_rerun()
 
@@ -175,18 +175,22 @@ btn_press = st.button('Submit Change')
 #                           , disabled=not is_valid)
 
 if btn_press:
-    time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-    session.write_pandas(df_file, "FORECAST_RBC", overwrite=True)
-    df_file_hist = df_file
-    df_file_hist['LAST_UPDATED'] = time
-    session.write_pandas(df_file_hist, "FORECAST_RBC_HISTORICAL", overwrite=False)
-#         uploaded_cols = df_file.columns.to_list()
-#         st.write(uploaded_cols)
-
-#         if 'RequiredColumn' not in uploaded_cols:
-#         st.write("Failed - Missing column 'RequiredColumn'")
-#         else:
-#             st.write("Loaded!")
+    try:
+        for i in cols:
+            df_file = df_file.rename(columns={cols[i]: i})
+    #     st.dataframe(edited)
+    #     df.rename(columns={"A": "a", "B": "c"})
+    #         st.dataframe(edited)
+    #     edited = edited[[cols_sorted]]
+        session.write_pandas(df_file, "FORECAST_RBC", overwrite=True)
+        time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+        df_file_hist = df_file
+        df_file_hist = df_file_hist.reindex(columns = cols_sorted)
+        df_file_hist['LAST_UPDATED'] = time 
+        session.write_pandas(df_file_hist, "FORECAST_RBC_HISTORICAL", overwrite=False)
+        st.success("Table updated")
+    except:
+        st.warning("Error updating table")
 
        
 # elif st.session_state["authentication_status"] is False:
