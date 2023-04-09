@@ -37,7 +37,7 @@ st.set_page_config(page_title="Dataframe with editable cells", page_icon="💾")
 #     "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/325/floppy-disk_1f4be.png",
 #     width=100,
 # )
-st.markdown('##Forecast RBC Editable Dataframe')
+st.header('Forecast RBC Editable Dataframe')
 
 # TYPE_MAPPINGS = {
 # 'int64': 'integer',
