@@ -117,20 +117,20 @@ with st.form("data_editor_form"):
     edited = st.experimental_data_editor(dataset, use_container_width=True, num_rows="dynamic")
     submit_button = st.form_submit_button("Submit")
 if submit_button:
-    try:
-        for i in cols:
-            edited = edited.rename(columns={cols[i]: i})
+#     try:
+    for i in cols:
+        edited = edited.rename(columns={cols[i]: i})
 #     df.rename(columns={"A": "a", "B": "c"})
 #         st.dataframe(edited)
-        edited = edited[cols_sorted]
-        session.write_pandas(edited, "FORECAST_RBC", overwrite=True)
-        time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-        edited_hist = edited
-        edited_hist['LAST_UPDATED'] = time 
-        session.write_pandas(edited_hist, "FORECAST_RBC_HISTORICAL", overwrite=False)
-        st.success("Table updated")
-    except:
-        st.warning("Error updating table")
+    edited = edited[cols_sorted]
+    session.write_pandas(edited, "FORECAST_RBC", overwrite=True)
+    time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+    edited_hist = edited
+    edited_hist['LAST_UPDATED'] = time 
+    session.write_pandas(edited_hist, "FORECAST_RBC_HISTORICAL", overwrite=False)
+    st.success("Table updated")
+#     except:
+#         st.warning("Error updating table")
 if st.button('Refresh'):
     st.experimental_rerun()
 
