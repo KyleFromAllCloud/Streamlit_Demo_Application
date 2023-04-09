@@ -119,7 +119,7 @@ with st.form("data_editor_form"):
 if submit_button:
 #     try:
     for i in cols:
-        edited = edited.rename(columns={cols[i]: i})
+        edited = edited.rename(columns={cols[i]: i.upper()})
 #     df.rename(columns={"A": "a", "B": "c"})
 #         st.dataframe(edited)
 #     edited = edited[[cols_sorted]]
