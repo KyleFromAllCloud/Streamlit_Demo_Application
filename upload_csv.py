@@ -29,6 +29,7 @@ def get_forward_month_year_list():
 months = get_forward_month_list()
 months_years = get_forward_month_year_list()
 cols = {months[i]: months_years[i] for i in range(len(months))}
+cols_sorted = ['BU', 'PORTFOLIO', 'CLIENT', 'OPPORTUNITY', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC', 'TOTAL', 'EXISTINGCLIENTNEWLOGO']
 
 # The code below is for the title and logo.
 # st.set_page_config(page_title="Dataframe with editable cells", page_icon="💾")
@@ -121,6 +122,7 @@ if submit_button:
             edited = edited.rename(columns={cols[i]: i})
 #     df.rename(columns={"A": "a", "B": "c"})
 #         st.dataframe(edited)
+        edited = edited[cols_sorted]
         session.write_pandas(edited, "FORECAST_RBC", overwrite=True)
         time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
         edited_hist = edited
