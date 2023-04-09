@@ -128,6 +128,7 @@ if submit_button:
     session.write_pandas(edited, "FORECAST_RBC", overwrite=True)
     time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
     edited_hist = edited
+    edited_hist = edited_hist.reindex(columns = cols_sorted)
     edited_hist['LAST_UPDATED'] = time 
     session.write_pandas(edited_hist, "FORECAST_RBC_HISTORICAL", overwrite=False)
     st.success("Table updated")
