@@ -120,16 +120,16 @@ if submit_button:
 #     try:
     for i in cols:
         edited = edited.rename(columns={cols[i]: i})
-    st.dataframe(edited)
+#     st.dataframe(edited)
 #     df.rename(columns={"A": "a", "B": "c"})
 #         st.dataframe(edited)
-#     edited = edited[[cols_sorted]]
-#     session.write_pandas(edited, "FORECAST_RBC", overwrite=True)
-#     time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-#     edited_hist = edited
-#     edited_hist['LAST_UPDATED'] = time 
-#     session.write_pandas(edited_hist, "FORECAST_RBC_HISTORICAL", overwrite=False)
-#     st.success("Table updated")
+    edited = edited[[cols_sorted]]
+    session.write_pandas(edited, "FORECAST_RBC", overwrite=True)
+    time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+    edited_hist = edited
+    edited_hist['LAST_UPDATED'] = time 
+    session.write_pandas(edited_hist, "FORECAST_RBC_HISTORICAL", overwrite=False)
+    st.success("Table updated")
 #     except:
 #         st.warning("Error updating table")
 if st.button('Refresh'):
