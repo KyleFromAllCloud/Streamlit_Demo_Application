@@ -29,7 +29,7 @@ def get_forward_month_year_list():
 months = get_forward_month_list()
 months_years = get_forward_month_year_list()
 cols = {months[i].upper(): months_years[i].upper() for i in range(len(months))}
-cols_sorted = ['BU', 'PORTFOLIO', 'CLIENT', 'OPPORTUNITY', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC', 'TOTAL', 'EXISTINGCLIENTNEWLOGO']
+cols_sorted = ['BU', 'PORTFOLIO', 'CLIENT', 'OPPORTUNITY', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC', 'EXISTINGCLIENTNEWLOGO']
 
 # The code below is for the title and logo.
 # st.set_page_config(page_title="Dataframe with editable cells", page_icon="💾")
