@@ -35,7 +35,7 @@ cols_sorted = ['BU', 'PORTFOLIO', 'CLIENT', 'OPPORTUNITY', 'JAN', 'FEB', 'MAR', 
 st.set_page_config(page_title="Dataframe with editable cells", page_icon="💾")
 st.image(
     "https://cdn.comparably.com/27194047/l/643974_logo_hero-digital.png",
-    width=300,
+    width=50,
 )
 st.header('Forecast RBC Editable Dataframe')
 
