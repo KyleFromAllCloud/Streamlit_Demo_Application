@@ -32,13 +32,12 @@ cols = {months[i].upper(): months_years[i].upper() for i in range(len(months))}
 cols_sorted = ['BU', 'PORTFOLIO', 'CLIENT', 'OPPORTUNITY', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC', 'EXISTINGCLIENTNEWLOGO']
 
 # The code below is for the title and logo.
-st.set_page_config(page_title="Dataframe with editable cells", page_icon="💾")
+st.set_page_config(page_title="Dataframe with editable cells", page_icon="💾", layout="wide")
 st.image(
     "https://cdn.comparably.com/27194047/l/643974_logo_hero-digital.png",
     width=50,
 )
 st.header('Forecast RBC Editable Dataframe')
-st.set_page_config(layout="wide")
 
 # TYPE_MAPPINGS = {
 # 'int64': 'integer',
