@@ -38,7 +38,7 @@ st.image(
     width=50,
 )
 st.header('Forecast RBC Editable Dataframe')
-set_page_config(layout="wide")
+st.set_page_config(layout="wide")
 
 # TYPE_MAPPINGS = {
 # 'int64': 'integer',
