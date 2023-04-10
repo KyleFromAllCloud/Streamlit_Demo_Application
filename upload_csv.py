@@ -38,6 +38,7 @@ st.image(
     width=50,
 )
 st.header('Forecast RBC Editable Dataframe')
+set_page_config(layout="wide")
 
 # TYPE_MAPPINGS = {
 # 'int64': 'integer',
@@ -115,7 +116,7 @@ def get_dataset():
 dataset = get_dataset()
 with st.form("data_editor_form"):
     st.caption("Edit the dataframe below")
-    edited = st.experimental_data_editor(dataset, width=500, num_rows="dynamic")
+    edited = st.experimental_data_editor(dataset, width=1200, num_rows="dynamic")
     submit_button = st.form_submit_button("Submit")
 if submit_button:
     try:
