@@ -145,7 +145,7 @@ if st.button('Refresh'):
 
 df_file = pd.DataFrame()
 
-uploaded_file = st.file_uploader('Upload a file', width=750)
+uploaded_file = st.file_uploader('Upload Most Recent Version of Forecast RBC Numbers')
 if uploaded_file is not None:
     # read csv
     df_file = pd.read_csv(uploaded_file)
