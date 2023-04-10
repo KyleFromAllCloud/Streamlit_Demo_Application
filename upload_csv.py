@@ -115,7 +115,7 @@ def get_dataset():
 dataset = get_dataset()
 with st.form("data_editor_form"):
     st.caption("Edit the dataframe below")
-    edited = st.experimental_data_editor(dataset, width=1200, num_rows="dynamic")
+    edited = st.experimental_data_editor(dataset, width=1500, num_rows="dynamic")
     submit_button = st.form_submit_button("Submit")
 if submit_button:
     try:
@@ -145,7 +145,7 @@ if st.button('Refresh'):
 
 df_file = pd.DataFrame()
 
-uploaded_file = st.file_uploader('Upload a file')
+uploaded_file = st.file_uploader('Upload a file', width=750)
 if uploaded_file is not None:
     # read csv
     df_file = pd.read_csv(uploaded_file)
