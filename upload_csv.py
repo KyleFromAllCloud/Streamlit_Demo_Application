@@ -99,6 +99,8 @@ else:
 #     st.set_page_config(layout="centered", page_title="Data Editor", page_icon="🧮")
 #     st.title("Snowflake Table Editor ❄️")
 #     st.caption("This is a demo of the `st.experimental_data_editor`.")
+if st.button('Refresh'):
+    st.experimental_rerun()
 def get_dataset():
     # load messages df
     df = session.table("FORECAST_RBC")
@@ -134,8 +136,6 @@ if submit_button:
         st.success("Table updated")
     except:
         st.warning("Error updating table")
-if st.button('Refresh'):
-    st.experimental_rerun()
 
 
 #     data_dict = yaml.safe_load(Path('csv_spec.yml').open('r'))
