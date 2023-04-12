@@ -149,7 +149,7 @@ uploaded_file = st.file_uploader('Upload Most Recent Version of Forecast RBC Num
 if uploaded_file is not None:
     # read csv
     df_file = pd.read_csv(uploaded_file)
-    df_file.columns = [x.lower() for x in df_file.columns]
+    df_file.columns = [x.upper() for x in df_file.columns]
 #     # Validate File
 #     st.header("File Validation")
 #     is_valid = True
