@@ -189,8 +189,8 @@ if btn_press:
         df_file_hist['LAST_UPDATED'] = time 
         session.write_pandas(df_file_hist, "FORECAST_RBC_HISTORICAL", overwrite=False)
         st.success("Table updated")
-    except:
-        st.warning("Error updating table")
+    except as e:
+        st.warning(f"Error updating table - {e}")
 
        
 # elif st.session_state["authentication_status"] is False:
