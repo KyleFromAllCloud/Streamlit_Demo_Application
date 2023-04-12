@@ -189,7 +189,7 @@ if btn_press:
         df_file_hist['LAST_UPDATED'] = time 
         session.write_pandas(df_file_hist, "FORECAST_RBC_HISTORICAL", overwrite=False)
         st.success("Table updated")
-    except as e:
+    except Exception as e:
         st.warning(f"Error updating table - {e}")
 
        
