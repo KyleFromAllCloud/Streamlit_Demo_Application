@@ -1,9 +1,9 @@
 {
 "account": "blb42788.us-east-1",
-"user": "KYLEKEOUGH",
-"password": "Vikings28452845@",
-"role": "RL_XFRMR_PRD",
-"warehouse": "WH_XFRMR_PRD",
-"database": "PRD_EDW_INFOMART",
+"user": "SVC_MATILLION_DEV",
+"password": "mYpass@123",
+"role": "RL_LOADER_DEV",
+"warehouse": "WH_LOADER_DEV",
+"database": "DEV_EDW_PSTG",
 "schema": "MANUAL_INPUTS"
 }
