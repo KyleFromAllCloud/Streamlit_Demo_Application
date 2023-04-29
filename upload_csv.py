@@ -117,7 +117,8 @@ def get_dataset():
 #     df = df.rename(cols)
     return df
 dataset = get_dataset()
-dataset_pd = session.table("FORECAST_RBC").to_pandas()
+# dataset_pd = session.table("FORECAST_RBC").to_pandas()
+dataset_pd = pd.Dataframe(dataset.collect())
 # dataset_pd = pd.melt(dataset_pd, id_vars = col_list_trim, value_vars = list(dataset.columns)[2:])
 st.dataframe(dataset)
 with st.form("data_editor_form"):
