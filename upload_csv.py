@@ -101,11 +101,11 @@ else:
 #     st.caption("This is a demo of the `st.experimental_data_editor`.")
 if st.button('Refresh'):
     st.experimental_rerun()
+col_list_trim = ['ACCOUNT', 'PORTFOLIO']
+col_list = col_list_trim + months
 def get_dataset():
     # load messages df
     df = session.table("FORECAST_RBC")
-    col_list_trim = ['ACCOUNT', 'PORTFOLIO']
-    col_list = col_list_trim + months
 #     col_list = col_list + ['EXISTINGCLIENTNEWLOGO']
     df = df[col_list]
 #     df.rename(columns={"JAN": "23-JAN","FEB": "23-FEB", "MAR": "23-MAR", "APR": "23-APR", 
