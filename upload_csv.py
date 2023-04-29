@@ -121,8 +121,8 @@ dataset = get_dataset()
 dataset_pd = pd.DataFrame(dataset.collect())
 def format_date(x):
     return datetime.strptime(x, '%b-%y')
-dataset_pd['value'] = dataset_pd['value'].map(format_date)
 dataset_pd = pd.melt(dataset_pd, id_vars = col_list_trim, value_vars = months_years)
+dataset_pd['variable'] = dataset_pd['variable'].map(format_date)
 st.dataframe(dataset_pd)
 with st.form("data_editor_form"):
     st.caption("Edit the dataframe below")
