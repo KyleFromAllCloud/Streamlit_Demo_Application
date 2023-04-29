@@ -107,7 +107,7 @@ def get_dataset():
     # load messages df
     df = session.table("FORECAST_RBC")
 #     col_list = col_list + ['EXISTINGCLIENTNEWLOGO']
-    df = df[col_list]
+#     df = df[col_list]
 #     df.rename(columns={"JAN": "23-JAN","FEB": "23-FEB", "MAR": "23-MAR", "APR": "23-APR", 
 #                       "MAY": "23-MAY", "JUN": "23-JUN", "JUL": "23-JUL", "AUG": "23-AUG", 
 #                       "SEP": "23-SEP", "OCT": "23-OCT", "NOV": "23-NOV", "DEC": "23-DEC", })
