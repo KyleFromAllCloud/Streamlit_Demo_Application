@@ -118,6 +118,8 @@ def get_dataset():
 dataset = get_dataset()
 with st.form("data_editor_form"):
     st.caption("Edit the dataframe below")
+    dataset = pd.melt(dataset, id_vars = col_list_trim, value_vars = months_years)
+    st.dataframe(dataset)
     edited = st.experimental_data_editor(dataset, width=1500, num_rows="dynamic")
     submit_button = st.form_submit_button("Submit")
 if submit_button:
@@ -129,8 +131,6 @@ if submit_button:
     #         st.dataframe(edited)
     #     edited = edited[[cols_sorted]]
         session.write_pandas(edited, "FORECAST_RBC", overwrite=True)
-        dataset = pd.melt(dataset, id_vars = col_list_trim, value_vars = months_years)
-        st.dataframe(dataset)
 #         time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
 #         edited_hist = edited
 #         edited_hist = edited_hist.reindex(columns = cols_sorted)
