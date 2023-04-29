@@ -117,7 +117,7 @@ def get_dataset():
 #     df = df.rename(cols)
     return df
 dataset = get_dataset()
-dataset = pd.melt(dataset, id_vars = col_list_trim, value_vars = months_years)
+dataset = pd.melt(dataset, id_vars = col_list_trim, value_vars = list(dataset.columns)[2:])
 st.dataframe(dataset)
 with st.form("data_editor_form"):
     st.caption("Edit the dataframe below")
