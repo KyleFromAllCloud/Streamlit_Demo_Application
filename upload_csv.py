@@ -28,6 +28,7 @@ def get_forward_month_year_list():
 
 months = get_forward_month_list()
 months_years = get_forward_month_year_list()
+months_years = [i.upper() for i in months_years]
 cols = {months[i].upper(): months_years[i].upper() for i in range(len(months))}
 cols_sorted = ['ACCOUNT', 'PORTFOLIO', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
 
@@ -116,7 +117,7 @@ def get_dataset():
 #     df = df.rename(cols)
     return df
 dataset = get_dataset()
-dataset = pd.melt(dataset, id_vars = col_list_trim, value_vars = cols)
+dataset = pd.melt(dataset, id_vars = col_list_trim, value_vars = months_years)
 st.dataframe(dataset)
 with st.form("data_editor_form"):
     st.caption("Edit the dataframe below")
