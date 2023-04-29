@@ -105,7 +105,7 @@ def get_dataset():
     # load messages df
     df = session.table("FORECAST_RBC")
     col_list_trim = ['ACCOUNT', 'PORTFOLIO']
-    col_list = col_list_trim + months_years
+    col_list = col_list_trim + months
 #     col_list = col_list + ['EXISTINGCLIENTNEWLOGO']
     df = df[col_list]
 #     df.rename(columns={"JAN": "23-JAN","FEB": "23-FEB", "MAR": "23-MAR", "APR": "23-APR", 
@@ -129,7 +129,7 @@ if submit_button:
     #         st.dataframe(edited)
     #     edited = edited[[cols_sorted]]
         session.write_pandas(edited, "FORECAST_RBC", overwrite=True)
-        dataset = pd.melt(dataset, id_vars = col_list_trim, value_vars = months)
+        dataset = pd.melt(dataset, id_vars = col_list_trim, value_vars = months_years)
         st.dataframe(dataset)
 #         time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
 #         edited_hist = edited
