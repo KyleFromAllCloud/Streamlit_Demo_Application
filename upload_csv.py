@@ -121,7 +121,7 @@ with st.form("data_editor_form"):
     submit_button = st.form_submit_button("Submit")
 if submit_button:
     try:
-        for i in cols:
+#         for i in cols:
 #             edited = edited.rename(columns={cols[i]: i})
     #     st.dataframe(edited)
     #     df.rename(columns={"A": "a", "B": "c"})
