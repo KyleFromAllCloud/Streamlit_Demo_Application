@@ -118,7 +118,7 @@ def get_dataset():
     return df
 dataset = get_dataset()
 dataset_pd = dataset.to_pandas()
-dataset_pd = pd.melt(dataset, id_vars = col_list_trim, value_vars = list(dataset.columns)[2:])
+dataset_pd = pd.melt(dataset_pd, id_vars = col_list_trim, value_vars = list(dataset.columns)[2:])
 st.dataframe(dataset_pd)
 with st.form("data_editor_form"):
     st.caption("Edit the dataframe below")
