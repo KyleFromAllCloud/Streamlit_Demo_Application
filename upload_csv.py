@@ -116,10 +116,10 @@ def get_dataset():
 #     df = df.rename(cols)
     return df
 dataset = get_dataset()
+dataset = pd.melt(dataset, id_vars = col_list_trim, value_vars = months_years)
+st.dataframe(dataset)
 with st.form("data_editor_form"):
     st.caption("Edit the dataframe below")
-    dataset = pd.melt(dataset, id_vars = col_list_trim, value_vars = months_years)
-    st.dataframe(dataset)
     edited = st.experimental_data_editor(dataset, width=1500, num_rows="dynamic")
     submit_button = st.form_submit_button("Submit")
 if submit_button:
