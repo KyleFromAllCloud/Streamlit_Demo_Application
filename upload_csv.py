@@ -117,9 +117,9 @@ def get_dataset():
 #     df = df.rename(cols)
     return df
 dataset = get_dataset()
-dataset_pd = dataset.to_pandas()
-dataset_pd = pd.melt(dataset_pd, id_vars = col_list_trim, value_vars = list(dataset.columns)[2:])
-# st.dataframe(dataset_pd)
+# dataset_pd = dataset.to_pandas()
+# dataset_pd = pd.melt(dataset_pd, id_vars = col_list_trim, value_vars = list(dataset.columns)[2:])
+st.dataframe(dataset)
 with st.form("data_editor_form"):
     st.caption("Edit the dataframe below")
     edited = st.experimental_data_editor(dataset, width=1500, num_rows="dynamic")
