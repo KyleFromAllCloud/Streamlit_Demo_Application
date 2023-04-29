@@ -24,7 +24,7 @@ def get_forward_month_list():
 
 def get_forward_month_year_list():
     now = datetime.now()
-    return [(now + relativedelta(months=i)).strftime('%y-%b') for i in range(12)]
+    return [(now + relativedelta(months=i)).strftime('%b-%y') for i in range(12)]
 
 months = get_forward_month_list()
 months_years = get_forward_month_year_list()
