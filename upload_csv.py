@@ -146,7 +146,8 @@ if submit_button:
         dataset_pd = session.create_dataframe(dataset_pd)
         session.write_pandas(dataset_pd, "FORECAST_RBC_HISTORICAL", overwrite=False)
 #         st.success("Table updated")
-    except:
+    except Exception as e:
+        st.memo(e)
         st.warning("Error updating table")
 
 
