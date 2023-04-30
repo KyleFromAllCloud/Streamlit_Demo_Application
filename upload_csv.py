@@ -123,6 +123,7 @@ def format_date(x):
     return datetime.strptime(x, '%b-%y').date()
 dataset_pd = pd.melt(dataset_pd, id_vars = col_list_trim, value_vars = months_years)
 dataset_pd['variable'] = dataset_pd['variable'].map(format_date)
+dataset_pd = dataset_pd.rename(columns={"variable":"MONTH_DATE","value":"REVENUE"})
 st.dataframe(dataset_pd)
 with st.form("data_editor_form"):
     st.caption("Edit the dataframe below")
@@ -137,12 +138,13 @@ if submit_button:
     #         st.dataframe(edited)
     #     edited = edited[[cols_sorted]]
         session.write_pandas(edited, "FORECAST_RBC", overwrite=True)
-#         time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+        time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
 #         edited_hist = edited
 #         edited_hist = edited_hist.reindex(columns = cols_sorted)
-#         edited_hist['LAST_UPDATED'] = time 
-#         session.write_pandas(edited_hist, "FORECAST_RBC_HISTORICAL", overwrite=False)
-#         st.success("Table updated")
+        dataset_pd['LAST_UPDATED'] = time 
+        dataset_pd = session.create_dataframe(dataset_pd)
+        session.write_pandas(dataset_pd, "FORECAST_RBC_HISTORICAL", overwrite=False)
+        st.success("Table updated")
     except:
         st.warning("Error updating table")
 
