@@ -141,10 +141,10 @@ if submit_button:
         time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
 #         edited_hist = edited
 #         edited_hist = edited_hist.reindex(columns = cols_sorted)
-        dataset_pd['LAST_UPDATED'] = time 
-        st.dataframe(dataset_pd)
-#         dataset_pd = session.create_dataframe(dataset_pd)
-#         session.write_pandas(dataset_pd, "FORECAST_RBC_HISTORICAL", overwrite=False)
+        dataset_pd['LAST_UPDATE_DATETIME'] = time 
+#         st.dataframe(dataset_pd)
+        dataset_pd = session.create_dataframe(dataset_pd)
+        session.write_pandas(dataset_pd, "FORECAST_RBC_HISTORICAL", overwrite=False)
 #         st.success("Table updated")
     except:
         st.warning("Error updating table")
