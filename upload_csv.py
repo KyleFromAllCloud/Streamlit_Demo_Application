@@ -162,7 +162,7 @@ uploaded_file = st.file_uploader('Upload Most Recent Version of Forecast RBC Num
 if uploaded_file is not None:
     # read csv
     df_file = pd.read_csv(uploaded_file, thousands=',')
-    df_file.columns = [x.upper() for x in df_file.columns]
+#     df_file.columns = [x.upper() for x in df_file.columns]
 #     # Validate File
 #     st.header("File Validation")
 #     is_valid = True
@@ -189,18 +189,20 @@ btn_press = st.button('Submit Change')
 
 if btn_press:
     try:
-        for i in cols:
-            df_file = df_file.rename(columns={cols[i]: i})
+#         for i in cols:
+#             df_file = df_file.rename(columns={cols[i]: i})
     #     st.dataframe(edited)
     #     df.rename(columns={"A": "a", "B": "c"})
     #         st.dataframe(edited)
     #     edited = edited[[cols_sorted]]
         session.write_pandas(df_file, "FORECAST_RBC", overwrite=True)
+        dataset_file_pd = pd.DataFrame(df_file.collect())
+        dataset_file_pd = pd.melt(dataset_file_pd, id_vars = col_list_trim, value_vars = months_years)
+        dataset_file_pd['variable'] = dataset_file_pd['variable'].map(format_date)
+        dataset_file_pd = dataset_file_pd.rename(columns={"variable":"MONTH_DATE","value":"REVENUE"})
         time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-        df_file_hist = df_file
-        df_file_hist = df_file_hist.reindex(columns = cols_sorted)
-        df_file_hist['LAST_UPDATED'] = time 
-        session.write_pandas(df_file_hist, "FORECAST_RBC_HISTORICAL", overwrite=False)
+        dataset_file_pd['LAST_UPDATE_DATETIME'] = time 
+        session.write_pandas(dataset_file_pd, "FORECAST_RBC_HISTORICAL", overwrite=False)
         st.success("Table updated")
     except Exception as e:
         st.warning(f"Error updating table - {e}")
