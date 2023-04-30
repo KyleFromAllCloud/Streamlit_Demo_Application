@@ -197,7 +197,7 @@ if btn_press:
     #     edited = edited[[cols_sorted]]
         session.write_pandas(df_file, "FORECAST_RBC", overwrite=True)
 #         dataset_file_pd = pd.DataFrame(df_file.collect())
-        dataset_file_pd = pd.melt(dataset_file, id_vars = col_list_trim, value_vars = months_years)
+        dataset_file_pd = pd.melt(df_file, id_vars = col_list_trim, value_vars = months_years)
         dataset_file_pd['variable'] = dataset_file_pd['variable'].map(format_date)
         dataset_file_pd = dataset_file_pd.rename(columns={"variable":"MONTH_DATE","value":"REVENUE"})
         time = datetime.now().strftime("%m/%d/%Y %H:%M:%S")
