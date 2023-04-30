@@ -119,7 +119,7 @@ def get_dataset():
 dataset = get_dataset()
 # dataset_pd = session.table("FORECAST_RBC").to_pandas()
 dataset_pd = pd.DataFrame(dataset.collect())
-st.dataset(dataset_pd)
+st.dataframe(dataset_pd)
 def format_date(x):
     return datetime.strptime(x, '%b-%y').date()
 # dataset_pd = pd.melt(dataset_pd, id_vars = col_list_trim, value_vars = months_years)
