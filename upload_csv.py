@@ -124,7 +124,7 @@ def format_date(x):
 dataset_pd = pd.melt(dataset_pd, id_vars = col_list_trim, value_vars = months_years)
 dataset_pd['variable'] = dataset_pd['variable'].map(format_date)
 dataset_pd = dataset_pd.rename(columns={"variable":"MONTH_DATE","value":"REVENUE"})
-st.dataframe(dataset_pd)
+# st.dataframe(dataset_pd)
 with st.form("data_editor_form"):
     st.caption("Edit the dataframe below")
     edited = st.experimental_data_editor(dataset, width=1500, num_rows="dynamic")
