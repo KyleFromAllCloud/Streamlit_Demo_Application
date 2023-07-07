@@ -121,11 +121,11 @@ dataset = get_dataset()
 # dataset_pd = session.table("FORECAST_RBC").to_pandas()
 dataset_pd = pd.DataFrame(dataset.collect())
 # st.dataframe(dataset_pd)
-def format_date(x):
-    return datetime.strptime(x, '%b-%y').date()
-dataset_pd = pd.melt(dataset_pd, id_vars = col_list_trim, value_vars = months_years)
-dataset_pd['variable'] = dataset_pd['variable'].map(format_date)
-dataset_pd = dataset_pd.rename(columns={"variable":"MONTH_DATE","value":"REVENUE"})
+# def format_date(x):
+#     return datetime.strptime(x, '%b-%y').date()
+# dataset_pd = pd.melt(dataset_pd, id_vars = col_list_trim, value_vars = months_years)
+# dataset_pd['variable'] = dataset_pd['variable'].map(format_date)
+# dataset_pd = dataset_pd.rename(columns={"variable":"MONTH_DATE","value":"REVENUE"})
 # st.dataframe(dataset_pd)
 with st.form("data_editor_form"):
     st.caption("Edit the dataframe below")
