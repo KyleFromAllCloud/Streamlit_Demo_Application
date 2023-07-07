@@ -27,7 +27,8 @@ def get_forward_month_year_list():
     return [(now + relativedelta(months=i)).strftime('%b-%y') for i in range(12)]
 
 months = get_forward_month_list()
-months_years = get_forward_month_year_list()
+# months_years = get_forward_month_year_list()
+months_years = ['APR-23', 'MAT-23', 'JUN-23', 'JUL-23', 'AUG-23', 'SEP-23', 'OCT-23', 'NOV-23', 'DEC-23', 'JAN-24', 'FEB-24', 'MAR-24']
 months_years = [i.upper() for i in months_years]
 cols = {months[i].upper(): months_years[i].upper() for i in range(len(months))}
 cols_sorted = ['ACCOUNT', 'PORTFOLIO', 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
@@ -122,7 +123,7 @@ dataset_pd = pd.DataFrame(dataset.collect())
 # st.dataframe(dataset_pd)
 def format_date(x):
     return datetime.strptime(x, '%b-%y').date()
-dataset_pd = pd.melt(dataset_pd, id_vars = col_list, value_vars = months_years)
+dataset_pd = pd.melt(dataset_pd, id_vars = col_list_trim, value_vars = months_years)
 dataset_pd['variable'] = dataset_pd['variable'].map(format_date)
 dataset_pd = dataset_pd.rename(columns={"variable":"MONTH_DATE","value":"REVENUE"})
 # st.dataframe(dataset_pd)
